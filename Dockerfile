@@ -1,7 +1,7 @@
-FROM golang:onbuild
-RUN mkdir /app
-WORKDIR /app
-ENV SRC_DIR=/go/src/github.com/hoenigmann/redis-proxy
-ADD . $SRC_DIR
-RUN cd $SRC_DIR; go build -o myapp; cp myapp /app/
+FROM golang
+ENV SRC_DIR=/go/src/github.com/hoenigmann/redis-proxy/
+COPY . $SRC_DIR
+RUN cd $SRC_DIR; go get ./...
+WORKDIR /go/src/github.com/hoenigmann/redis-proxy/cmd
+RUN go build -o myapp; cp myapp /app/
 #RUN go test -timeout 30s cmd/
