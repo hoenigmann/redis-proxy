@@ -1,0 +1,11 @@
+redis-proxy:
+  build: .
+  expose:
+    - 80
+
+redis:
+  image: redis
+  links:
+    - redis-proxy
+  ports:
+    - "6379:6379"
